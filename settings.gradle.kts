@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "NavigationSample"
 include(":app")
 include(":activityBasedUi")
+include(":composeBasedUi")

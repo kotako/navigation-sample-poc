@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation(project(":activityBasedUi"))
+    implementation(project(":composeBasedUi"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
