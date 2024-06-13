@@ -1,5 +1,6 @@
 package com.example.composebasedui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,9 +14,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDeepLinkDslBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import com.example.composebasedui.ui.theme.NavigationSampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,8 +58,12 @@ fun NavigationSampleApp() {
                 }
             )
         }
-        composable("sub") {
-            SubScreen()
+        composable("sub", deepLinks = listOf(navDeepLink { uriPattern = "myapp://sub_compose" })) {
+            SubScreen(
+                onClick = {
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("myapp://main")))
+                }
+            )
         }
     }
 }

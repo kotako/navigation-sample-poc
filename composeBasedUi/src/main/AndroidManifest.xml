@@ -4,9 +4,16 @@
     <application>
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.NavigationSample" />
+            android:theme="@style/Theme.NavigationSample">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="myapp" android:host="sub_compose" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
