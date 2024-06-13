@@ -1,5 +1,6 @@
 package com.example.composebasedui
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,8 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavDeepLinkDslBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -50,6 +51,7 @@ fun GreetingPreview() {
 @Composable
 fun NavigationSampleApp() {
     val navController = rememberNavController()
+    val context = LocalContext.current
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
             MainScreen(
@@ -61,7 +63,7 @@ fun NavigationSampleApp() {
         composable("sub", deepLinks = listOf(navDeepLink { uriPattern = "myapp://sub_compose" })) {
             SubScreen(
                 onClick = {
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("myapp://main")))
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("myapp://main_activity")))
                 }
             )
         }
@@ -86,7 +88,7 @@ fun MainScreen(onClick: () -> Unit) {
 }
 
 @Composable
-fun SubScreen() {
+fun SubScreen(onClick: () -> Unit) {
     NavigationSampleTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -95,6 +97,9 @@ fun SubScreen() {
             Column(modifier = Modifier.wrapContentSize()) {
                 Greeting("Android")
                 Greeting("SubScreen")
+                Button(onClick = onClick) {
+                    Text("Navigate to MainActivity(Activity)")
+                }
             }
         }
     }
