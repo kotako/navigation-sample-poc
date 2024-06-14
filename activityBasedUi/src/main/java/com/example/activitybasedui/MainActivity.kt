@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<Button>(R.id.button).setOnClickListener {
+        findViewById<Button>(R.id.button_main).setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("myapp://main_compose")))
+        }
+        findViewById<Button>(R.id.button_sub).setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("myapp://sub_compose")))
         }
     }

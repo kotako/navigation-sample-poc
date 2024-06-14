@@ -53,7 +53,7 @@ fun NavigationSampleApp() {
     val navController = rememberNavController()
     val context = LocalContext.current
     NavHost(navController = navController, startDestination = "main") {
-        composable("main") {
+        composable("main", deepLinks = listOf(navDeepLink { uriPattern = "myapp://main_compose" })) {
             MainScreen(
                 onClick = {
                     navController.navigate("sub")
